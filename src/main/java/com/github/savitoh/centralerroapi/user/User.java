@@ -1,5 +1,6 @@
 package com.github.savitoh.centralerroapi.user;
 
+import com.github.savitoh.centralerroapi.user.payload.UserResponsePayload;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -22,9 +23,9 @@ public class User {
     @Column(nullable = false, length = 50)
     private String nome;
 
-    @Size(min = 4, max = 12)
     @NotBlank
-    @Column(nullable = false, length = 12)
+    @Size(min = 4, max = 12)
+    @Column(nullable = false, length = 12, unique = true)
     private String login;
 
     @Size(max = 68)
@@ -54,6 +55,14 @@ public class User {
 
     public Integer getId() {
         return id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public UserResponsePayload toDetalheUserResponsePayload() {
@@ -102,8 +111,4 @@ public class User {
             return false;
         return true;
     }
-
-
-
-    
 }

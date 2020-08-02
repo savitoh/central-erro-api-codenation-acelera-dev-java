@@ -1,5 +1,7 @@
 package com.github.savitoh.centralerroapi.user;
 
+import com.github.savitoh.centralerroapi.user.payload.NovoUserRequestPayload;
+import com.github.savitoh.centralerroapi.user.payload.UserResponsePayload;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +11,7 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
-@RequestMapping("api/v1/users")
+@RequestMapping("/api/v1/users")
 public class UserResource {
 
     private final UserRepository userRepository;

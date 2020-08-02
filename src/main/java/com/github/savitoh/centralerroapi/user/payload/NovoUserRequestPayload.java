@@ -1,5 +1,7 @@
-package com.github.savitoh.centralerroapi.user;
+package com.github.savitoh.centralerroapi.user.payload;
 
+import com.github.savitoh.centralerroapi.validacao.UniqueKey;
+import com.github.savitoh.centralerroapi.user.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.NotBlank;
@@ -13,6 +15,7 @@ public class NovoUserRequestPayload {
 
     @NotBlank
     @Size(min = 4, max = 12)
+    @UniqueKey(className = User.class, columnName = "login")
     private final String login;
 
     @NotBlank
