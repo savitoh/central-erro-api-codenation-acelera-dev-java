@@ -30,7 +30,7 @@ public class User {
 
     @Size(max = 68)
     @NotBlank
-    @Column(nullable = false, length = 68)
+    @Column(nullable = false, length = 60)
     private String password;
 
     @CreationTimestamp
