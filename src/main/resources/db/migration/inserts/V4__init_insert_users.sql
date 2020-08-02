@@ -1,0 +1,1 @@
+INSERT INTO PUBLIC.USER VALUES (1, 'User_Admin', '{bcrypt}$2a$10$79Iji52VuD.0wbceVmlx7uYterM6J6ydvQoH1GVHmI/eORqY.Ctc.', 'sistema_adm', current_timestamp);
