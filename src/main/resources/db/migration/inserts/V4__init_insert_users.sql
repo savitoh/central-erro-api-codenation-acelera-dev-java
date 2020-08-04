@@ -1,1 +1,0 @@
-INSERT INTO PUBLIC.USER VALUES (1, 'User_Admin', '$2a$10$nPi3kckIBa5TMZYFf6HXxesEK2argGUzaH2n9vabtWcshB7L4jv3y', 'sistema_adm', current_timestamp);

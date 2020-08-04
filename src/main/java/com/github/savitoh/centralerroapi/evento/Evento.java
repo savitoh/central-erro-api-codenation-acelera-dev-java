@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 
 import com.github.savitoh.centralerroapi.evento.tipologlevel.TipoLogLevel;
 import com.github.savitoh.centralerroapi.evento.tipologlevel.TipoLogLevelConverter;
-import com.github.savitoh.centralerroapi.user.User;
+import com.github.savitoh.centralerroapi.usuario.Usuario;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
@@ -51,8 +51,8 @@ public class Evento {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
 
     /**
      * @deprecated(Usado apenas pelo Hibernate)
@@ -63,13 +63,13 @@ public class Evento {
 
     public Evento(@NotNull TipoLogLevel level, @NotEmpty @Max(1000) String descricao,
                   @NotEmpty String log, @NotNull LocalDateTime dataGeracao,
-                  @NotNull Integer quantidade, @NotNull User user) {
+                  @NotNull Integer quantidade, @NotNull Usuario usuario) {
         this.level = level;
         this.descricao = descricao;
         this.log = log;
         this.dataGeracao = dataGeracao;
         this.quantidade = quantidade;
-        this.user = user;
+        this.usuario = usuario;
     }
 
     public Long getId() {

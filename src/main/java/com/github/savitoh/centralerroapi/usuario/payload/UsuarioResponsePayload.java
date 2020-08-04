@@ -1,12 +1,12 @@
-package com.github.savitoh.centralerroapi.user.payload;
+package com.github.savitoh.centralerroapi.usuario.payload;
 
-public class UserResponsePayload {
+public class UsuarioResponsePayload {
 
     private final String nome;
 
     private final String login;
 
-    public UserResponsePayload(String nome, String login) {
+    public UsuarioResponsePayload(String nome, String login) {
         this.nome = nome;
         this.login = login;
     }
