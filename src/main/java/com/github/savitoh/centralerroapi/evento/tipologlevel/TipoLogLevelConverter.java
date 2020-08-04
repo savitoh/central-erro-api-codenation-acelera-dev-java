@@ -1,4 +1,4 @@
-package com.github.savitoh.centralerroapi.evento;
+package com.github.savitoh.centralerroapi.evento.tipologlevel;
 
 import javax.persistence.AttributeConverter;
 

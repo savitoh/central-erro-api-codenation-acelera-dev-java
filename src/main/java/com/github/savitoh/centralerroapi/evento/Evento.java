@@ -2,18 +2,15 @@ package com.github.savitoh.centralerroapi.evento;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import com.github.savitoh.centralerroapi.evento.tipologlevel.TipoLogLevel;
+import com.github.savitoh.centralerroapi.evento.tipologlevel.TipoLogLevelConverter;
+import com.github.savitoh.centralerroapi.user.User;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
@@ -25,11 +22,13 @@ public class Evento {
     @Column(name = "evento_id")
     private Long id;
 
+    @NotNull
     @Convert(converter = TipoLogLevelConverter.class)
+    @Column(name = "level_id", nullable = false)
     private TipoLogLevel level;
 
     @NotEmpty
-    @Max(1000)
+    @Size(max = 1000)
     @Column(length = 1000, nullable = false)
     private String descricao;
 
@@ -50,6 +49,11 @@ public class Evento {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     /**
      * @deprecated(Usado apenas pelo Hibernate)
      */
@@ -57,13 +61,19 @@ public class Evento {
     public Evento() {
     }
 
-    public Evento(TipoLogLevel level, @NotEmpty @Max(1000) String descricao, @NotEmpty String log,
-            @NotNull LocalDateTime dataGeracao, @NotNull Integer quantidade) {
+    public Evento(@NotNull TipoLogLevel level, @NotEmpty @Max(1000) String descricao,
+                  @NotEmpty String log, @NotNull LocalDateTime dataGeracao,
+                  @NotNull Integer quantidade, @NotNull User user) {
         this.level = level;
         this.descricao = descricao;
         this.log = log;
         this.dataGeracao = dataGeracao;
         this.quantidade = quantidade;
+        this.user = user;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override

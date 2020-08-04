@@ -13,9 +13,14 @@ CREATE TABLE PUBLIC.EVENTO (
     data_geracao timestamp without time zone NOT NULL,
     quantidade INTEGER NOT NULL,
     created_at timestamp without time zone NOT NULL DEFAULT now(),
+    user_id INTEGER NOT NULL,
     CONSTRAINT evento_pk PRIMARY KEY (evento_id),
-    CONSTRAINT evento_tipologlevel_id_fK FOREIGN KEY (level_id)
+    CONSTRAINT evento_tipologlevel_fK FOREIGN KEY (level_id)
         REFERENCES PUBLIC.TIPO_LOG_LEVEL (id)
         ON UPDATE CASCADE
-        ON DELETE RESTRICT
+        ON DELETE RESTRICT,
+    CONSTRAINT user_fk FOREIGN KEY (user_id)
+            REFERENCES PUBLIC.USER (user_id)
+            ON UPDATE CASCADE
+            ON DELETE RESTRICT
 );
