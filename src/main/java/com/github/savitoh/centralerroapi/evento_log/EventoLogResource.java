@@ -1,6 +1,6 @@
-package com.github.savitoh.centralerroapi.evento;
+package com.github.savitoh.centralerroapi.evento_log;
 
-import com.github.savitoh.centralerroapi.evento.payload.NovoEventoRequestPayload;
+import com.github.savitoh.centralerroapi.evento_log.payload.NovoEventoRequestPayload;
 import com.github.savitoh.centralerroapi.exception.RecuperaUsuarioException;
 import com.github.savitoh.centralerroapi.seguranca.UserPrincipal;
 import com.github.savitoh.centralerroapi.usuario.Usuario;
@@ -18,14 +18,14 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/api/v1/eventos")
-public class EventoResource {
+public class EventoLogResource {
 
-    private final EventoRepository eventoRepository;
+    private final EventoLogRepository eventoLogRepository;
 
     private final UsuarioRepository usuarioRepository;
 
-    public EventoResource(EventoRepository eventoRepository, UsuarioRepository usuarioRepository) {
-        this.eventoRepository = eventoRepository;
+    public EventoLogResource(EventoLogRepository eventoLogRepository, UsuarioRepository usuarioRepository) {
+        this.eventoLogRepository = eventoLogRepository;
         this.usuarioRepository = usuarioRepository;
     }
 
@@ -35,12 +35,12 @@ public class EventoResource {
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
         Usuario usuario = usuarioRepository.findById(userPrincipal.getId())
                 .orElseThrow(() -> new RecuperaUsuarioException("Não foi possivel recuperar o usuário da request (:"));
-        Evento evento = novoEventoRequestPayload.toEvento(usuario);
-        eventoRepository.save(evento);
+        EventoLog eventoLog = novoEventoRequestPayload.toEvento(usuario);
+        eventoLogRepository.save(eventoLog);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(evento.getId())
+                .buildAndExpand(eventoLog.getId())
                 .toUri();
         return ResponseEntity.created(location).build();
     }

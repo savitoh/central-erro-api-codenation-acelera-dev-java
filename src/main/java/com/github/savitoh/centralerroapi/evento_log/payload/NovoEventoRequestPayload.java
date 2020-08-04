@@ -1,8 +1,8 @@
-package com.github.savitoh.centralerroapi.evento.payload;
+package com.github.savitoh.centralerroapi.evento_log.payload;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.github.savitoh.centralerroapi.evento.Evento;
-import com.github.savitoh.centralerroapi.evento.tipologlevel.TipoLogLevel;
+import com.github.savitoh.centralerroapi.evento_log.EventoLog;
+import com.github.savitoh.centralerroapi.evento_log.tipologlevel.TipoLogLevel;
 import com.github.savitoh.centralerroapi.usuario.Usuario;
 import com.github.savitoh.centralerroapi.validacao.TipoLogLevelExists;
 
@@ -70,8 +70,8 @@ public class NovoEventoRequestPayload {
         this.quantidade = quantidade;
     }
 
-    public Evento toEvento(Usuario usuario) {
+    public EventoLog toEvento(Usuario usuario) {
         TipoLogLevel tipoLogLevel = TipoLogLevel.getById(levelCodigo).orElseThrow(IllegalArgumentException::new);
-        return new Evento(tipoLogLevel, descricao, log, dataGeracao, quantidade, usuario);
+        return new EventoLog(tipoLogLevel, descricao, log, dataGeracao, quantidade, usuario);
     }
 }
