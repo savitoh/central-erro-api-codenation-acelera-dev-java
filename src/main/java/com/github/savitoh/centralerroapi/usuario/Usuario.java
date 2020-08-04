@@ -1,6 +1,6 @@
-package com.github.savitoh.centralerroapi.user;
+package com.github.savitoh.centralerroapi.usuario;
 
-import com.github.savitoh.centralerroapi.user.payload.UserResponsePayload;
+import com.github.savitoh.centralerroapi.usuario.payload.UsuarioResponsePayload;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -10,12 +10,12 @@ import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
-public class User {
+public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQUENCE")
-    @SequenceGenerator(name="USER_SEQUENCE", sequenceName = "USER_SEQ", allocationSize=1)
-    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USUARIO_SEQ")
+    @SequenceGenerator(name="USUARIO_SEQ", sequenceName = "USUARIO_SEQ", allocationSize=1)
+    @Column(name = "usuario_id")
     private Integer id;
 
     @NotBlank
@@ -41,13 +41,13 @@ public class User {
      * @deprecated(usado apeanas pelo hibernate)
      */
     @Deprecated(since = "26/07/2020", forRemoval = false)
-    public User() {
+    public Usuario() {
     }
 
-    public User(@NotBlank @Size(max = 50) String nome,
-                @Size(min = 4, max = 12) @NotBlank String login,
-                @Size(max = 68) @NotBlank String password,
-                PasswordEncoder passwordEncoder) {
+    public Usuario(@NotBlank @Size(max = 50) String nome,
+                   @Size(min = 4, max = 12) @NotBlank String login,
+                   @Size(max = 68) @NotBlank String password,
+                   PasswordEncoder passwordEncoder) {
         this.nome = nome;
         this.login = login;
         this.password = passwordEncoder.encode(password);
@@ -65,8 +65,8 @@ public class User {
         return password;
     }
 
-    public UserResponsePayload toDetalheUserResponsePayload() {
-        return new UserResponsePayload(nome, login);
+    public UsuarioResponsePayload toDetalheUserResponsePayload() {
+        return new UsuarioResponsePayload(nome, login);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class User {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        User other = (User) obj;
+        Usuario other = (Usuario) obj;
         if (id == null) {
             if (other.id != null)
                 return false;

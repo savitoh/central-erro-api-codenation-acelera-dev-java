@@ -3,8 +3,8 @@ package com.github.savitoh.centralerroapi.evento;
 import com.github.savitoh.centralerroapi.evento.payload.NovoEventoRequestPayload;
 import com.github.savitoh.centralerroapi.exception.RecuperaUsuarioException;
 import com.github.savitoh.centralerroapi.seguranca.UserPrincipal;
-import com.github.savitoh.centralerroapi.user.User;
-import com.github.savitoh.centralerroapi.user.UserRepository;
+import com.github.savitoh.centralerroapi.usuario.Usuario;
+import com.github.savitoh.centralerroapi.usuario.UsuarioRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,20 +22,20 @@ public class EventoResource {
 
     private final EventoRepository eventoRepository;
 
-    private final UserRepository userRepository;
+    private final UsuarioRepository usuarioRepository;
 
-    public EventoResource(EventoRepository eventoRepository, UserRepository userRepository) {
+    public EventoResource(EventoRepository eventoRepository, UsuarioRepository usuarioRepository) {
         this.eventoRepository = eventoRepository;
-        this.userRepository = userRepository;
+        this.usuarioRepository = usuarioRepository;
     }
 
     @PostMapping
     public ResponseEntity<String> criarEvento(@Valid @RequestBody NovoEventoRequestPayload novoEventoRequestPayload,
                                               Authentication authentication) {
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
-        User user = userRepository.findById(userPrincipal.getId())
+        Usuario usuario = usuarioRepository.findById(userPrincipal.getId())
                 .orElseThrow(() -> new RecuperaUsuarioException("Não foi possivel recuperar o usuário da request (:"));
-        Evento evento = novoEventoRequestPayload.toEvento(user);
+        Evento evento = novoEventoRequestPayload.toEvento(usuario);
         eventoRepository.save(evento);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()

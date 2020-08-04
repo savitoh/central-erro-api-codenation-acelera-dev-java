@@ -3,7 +3,7 @@ package com.github.savitoh.centralerroapi.evento.payload;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.github.savitoh.centralerroapi.evento.Evento;
 import com.github.savitoh.centralerroapi.evento.tipologlevel.TipoLogLevel;
-import com.github.savitoh.centralerroapi.user.User;
+import com.github.savitoh.centralerroapi.usuario.Usuario;
 import com.github.savitoh.centralerroapi.validacao.TipoLogLevelExists;
 
 import javax.validation.constraints.Max;
@@ -11,7 +11,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.function.Function;
 
 public class NovoEventoRequestPayload {
 
@@ -71,8 +70,8 @@ public class NovoEventoRequestPayload {
         this.quantidade = quantidade;
     }
 
-    public Evento toEvento(User user) {
+    public Evento toEvento(Usuario usuario) {
         TipoLogLevel tipoLogLevel = TipoLogLevel.getById(levelCodigo).orElseThrow(IllegalArgumentException::new);
-        return new Evento(tipoLogLevel, descricao, log, dataGeracao, quantidade, user);
+        return new Evento(tipoLogLevel, descricao, log, dataGeracao, quantidade, usuario);
     }
 }

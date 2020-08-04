@@ -1,6 +1,6 @@
 package com.github.savitoh.centralerroapi.seguranca;
 
-import com.github.savitoh.centralerroapi.user.User;
+import com.github.savitoh.centralerroapi.usuario.Usuario;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,14 +9,14 @@ import java.util.Collections;
 
 public class UserPrincipal implements UserDetails {
 
-    private final User user;
+    private final Usuario usuario;
 
-    public UserPrincipal(User user) {
-        this.user = user;
+    public UserPrincipal(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Integer getId() {
-        return user.getId();
+        return usuario.getId();
     }
 
     @Override
@@ -26,12 +26,12 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return usuario.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getLogin();
+        return usuario.getLogin();
     }
 
     @Override
