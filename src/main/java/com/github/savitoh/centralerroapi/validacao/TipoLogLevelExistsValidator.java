@@ -1,6 +1,6 @@
 package com.github.savitoh.centralerroapi.validacao;
 
-import com.github.savitoh.centralerroapi.evento.tipologlevel.TipoLogLevel;
+import com.github.savitoh.centralerroapi.evento_log.tipologlevel.TipoLogLevel;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

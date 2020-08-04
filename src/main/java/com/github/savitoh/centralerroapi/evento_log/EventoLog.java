@@ -1,25 +1,24 @@
-package com.github.savitoh.centralerroapi.evento;
+package com.github.savitoh.centralerroapi.evento_log;
 
-import java.time.LocalDateTime;
+import com.github.savitoh.centralerroapi.evento_log.tipologlevel.TipoLogLevel;
+import com.github.savitoh.centralerroapi.evento_log.tipologlevel.TipoLogLevelConverter;
+import com.github.savitoh.centralerroapi.usuario.Usuario;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import com.github.savitoh.centralerroapi.evento.tipologlevel.TipoLogLevel;
-import com.github.savitoh.centralerroapi.evento.tipologlevel.TipoLogLevelConverter;
-import com.github.savitoh.centralerroapi.usuario.Usuario;
-import org.hibernate.annotations.CreationTimestamp;
+import java.time.LocalDateTime;
 
 @Entity
-public class Evento {
+public class EventoLog {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EVENTO_SEQUENCE")
-    @SequenceGenerator(name="EVENTO_SEQUENCE", sequenceName = "EVENTO_SEQ", allocationSize=1)
-    @Column(name = "evento_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EVENTO_LOG_SEQ")
+    @SequenceGenerator(name="EVENTO_LOG_SEQ", sequenceName = "EVENTO_LOG_SEQ", allocationSize=1)
+    @Column(name = "evento_log_id")
     private Long id;
 
     @NotNull
@@ -58,12 +57,12 @@ public class Evento {
      * @deprecated(Usado apenas pelo Hibernate)
      */
     @Deprecated(since = "27/07/2020", forRemoval = false)
-    public Evento() {
+    public EventoLog() {
     }
 
-    public Evento(@NotNull TipoLogLevel level, @NotEmpty @Max(1000) String descricao,
-                  @NotEmpty String log, @NotNull LocalDateTime dataGeracao,
-                  @NotNull Integer quantidade, @NotNull Usuario usuario) {
+    public EventoLog(@NotNull TipoLogLevel level, @NotEmpty @Max(1000) String descricao,
+                     @NotEmpty String log, @NotNull LocalDateTime dataGeracao,
+                     @NotNull Integer quantidade, @NotNull Usuario usuario) {
         this.level = level;
         this.descricao = descricao;
         this.log = log;
@@ -96,7 +95,7 @@ public class Evento {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Evento other = (Evento) obj;
+        EventoLog other = (EventoLog) obj;
         if (createdAt == null) {
             if (other.createdAt != null)
                 return false;
