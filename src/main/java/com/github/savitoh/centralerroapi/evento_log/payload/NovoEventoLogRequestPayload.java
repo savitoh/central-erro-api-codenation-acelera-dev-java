@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
-public class NovoEventoRequestPayload {
+public class NovoEventoLogRequestPayload {
 
     @NotNull
     @TipoLogLevelExists
@@ -36,12 +36,12 @@ public class NovoEventoRequestPayload {
      * @deprecated(Usado apenas pelo Jackson)
      */
     @Deprecated(forRemoval = false)
-    public NovoEventoRequestPayload() {
+    public NovoEventoLogRequestPayload() {
     }
 
-    public NovoEventoRequestPayload(@NotNull Short levelCodigo, @NotEmpty @Max(1000) String descricao,
-                                    @NotEmpty String log, @NotNull LocalDateTime dataGeracao,
-                                    @NotNull Integer quantidade) {
+    public NovoEventoLogRequestPayload(@NotNull Short levelCodigo, @NotEmpty @Max(1000) String descricao,
+                                       @NotEmpty String log, @NotNull LocalDateTime dataGeracao,
+                                       @NotNull Integer quantidade) {
         this.levelCodigo = levelCodigo;
         this.descricao = descricao;
         this.log = log;
