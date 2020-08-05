@@ -1,8 +1,10 @@
 package com.github.savitoh.centralerroapi.evento_log;
 
+import com.github.savitoh.centralerroapi.evento_log.payload.EventoLogResponsePayload;
 import com.github.savitoh.centralerroapi.evento_log.tipologlevel.TipoLogLevel;
 import com.github.savitoh.centralerroapi.evento_log.tipologlevel.TipoLogLevelConverter;
 import com.github.savitoh.centralerroapi.usuario.Usuario;
+import com.github.savitoh.centralerroapi.usuario.payload.UsuarioResponsePayload;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -73,6 +75,11 @@ public class EventoLog {
 
     public Long getId() {
         return id;
+    }
+
+    public EventoLogResponsePayload toEventoLogResponsePayload() {
+        final UsuarioResponsePayload usuarioResponsePayload = usuario.toDetalheUserResponsePayload();
+        return new EventoLogResponsePayload(this.level, this.descricao, this.log, this.dataGeracao, this.quantidade, usuarioResponsePayload);
     }
 
     @Override
