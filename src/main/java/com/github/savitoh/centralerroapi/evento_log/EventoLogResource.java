@@ -1,18 +1,20 @@
 package com.github.savitoh.centralerroapi.evento_log;
 
+import com.github.savitoh.centralerroapi.event.RecursoCriadoEvent;
 import com.github.savitoh.centralerroapi.evento_log.payload.EventoLogResponsePayload;
 import com.github.savitoh.centralerroapi.evento_log.payload.NovoEventoLogRequestPayload;
 import com.github.savitoh.centralerroapi.exception.RecuperaUsuarioException;
 import com.github.savitoh.centralerroapi.seguranca.UserPrincipal;
 import com.github.savitoh.centralerroapi.usuario.Usuario;
 import com.github.savitoh.centralerroapi.usuario.UsuarioRepository;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.net.URI;
 
 @RestController
 @RequestMapping("/api/v1/eventos")
@@ -22,9 +24,14 @@ public class EventoLogResource {
 
     private final UsuarioRepository usuarioRepository;
 
-    public EventoLogResource(EventoLogRepository eventoLogRepository, UsuarioRepository usuarioRepository) {
+    private final ApplicationEventPublisher publisher;
+
+    public EventoLogResource(EventoLogRepository eventoLogRepository,
+                             UsuarioRepository usuarioRepository,
+                             ApplicationEventPublisher publisher) {
         this.eventoLogRepository = eventoLogRepository;
         this.usuarioRepository = usuarioRepository;
+        this.publisher = publisher;
     }
 
     @GetMapping("/{id}")
@@ -36,17 +43,14 @@ public class EventoLogResource {
 
     @PostMapping
     public ResponseEntity<String> criarEvento(@Valid @RequestBody NovoEventoLogRequestPayload novoEventoLogRequestPayload,
-                                              Authentication authentication) {
+                                              Authentication authentication,
+                                              HttpServletResponse response) {
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
         Usuario usuario = usuarioRepository.findById(userPrincipal.getId())
                 .orElseThrow(() -> new RecuperaUsuarioException("Não foi possivel recuperar o usuário da request (:"));
         EventoLog eventoLog = novoEventoLogRequestPayload.toEvento(usuario);
         eventoLogRepository.save(eventoLog);
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(eventoLog.getId())
-                .toUri();
-        return ResponseEntity.created(location).build();
+        publisher.publishEvent(new RecursoCriadoEvent<>(this, response, eventoLog.getId()));
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
