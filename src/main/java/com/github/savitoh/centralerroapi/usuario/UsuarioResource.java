@@ -1,6 +1,7 @@
 package com.github.savitoh.centralerroapi.usuario;
 
 import com.github.savitoh.centralerroapi.event.RecursoCriadoEvent;
+import com.github.savitoh.centralerroapi.exception.RecursoNaoEncontradoException;
 import com.github.savitoh.centralerroapi.usuario.payload.NovoUsuarioRequestPayload;
 import com.github.savitoh.centralerroapi.usuario.payload.UsuarioResponsePayload;
 import org.springframework.context.ApplicationEventPublisher;
@@ -35,7 +36,7 @@ public class UsuarioResource {
     public ResponseEntity<UsuarioResponsePayload> getUserById(@PathVariable("id") Integer id) {
         return usuarioRepository.findById(id)
             .map(user -> ResponseEntity.ok().body(user.toDetalheUserResponsePayload()))
-            .orElseThrow(RuntimeException::new);
+            .orElseThrow(() -> new RecursoNaoEncontradoException(String.format("Usuário com identificador: %s não encontrado", id)));
     }
 
     @PostMapping

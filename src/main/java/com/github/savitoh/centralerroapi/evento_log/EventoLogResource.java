@@ -4,6 +4,7 @@ import com.github.savitoh.centralerroapi.event.RecursoCriadoEvent;
 import com.github.savitoh.centralerroapi.evento_log.payload.EventoLogResponsePayload;
 import com.github.savitoh.centralerroapi.evento_log.payload.NovoEventoLogRequestPayload;
 import com.github.savitoh.centralerroapi.exception.RecuperaUsuarioException;
+import com.github.savitoh.centralerroapi.exception.RecursoNaoEncontradoException;
 import com.github.savitoh.centralerroapi.seguranca.UserPrincipal;
 import com.github.savitoh.centralerroapi.usuario.Usuario;
 import com.github.savitoh.centralerroapi.usuario.UsuarioRepository;
@@ -38,7 +39,7 @@ public class EventoLogResource {
     public ResponseEntity<EventoLogResponsePayload> getById(@PathVariable("id") Long id) {
         return eventoLogRepository.findById(id)
                 .map(evento -> ResponseEntity.ok(evento.toEventoLogResponsePayload()))
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new RecursoNaoEncontradoException(String.format("Evento LOG com identificador: %s não encontrado", id)));
     }
 
     @PostMapping
