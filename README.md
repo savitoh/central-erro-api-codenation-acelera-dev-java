@@ -30,3 +30,21 @@ Abaixo estão os requisitos desta API, o time terá total liberdade para tomar a
 * Deve suportar Ordenação por diferentes tipos de atributos
 * A consulta de listagem não deve retornar os LOGs dos Eventos
 * Deve permitir a busca de um evento por um ID, dessa maneira exibindo o LOG desse evento em específico
+
+## Rodando a aplicação
+
+A aplicação pode ser iniciada de diversas formas, abaixo exploraremos todas elas. 
+
+### Usando Banco em Memória (H2)
+
+#### Requisitos: 
+* JDK 11
+* Maven V3.5
+
+Rode o comando a seguir na pasta root do projeto: 
+```
+mvn sprinb-boot:run -Dspring.profiles.active=h2
+```
+
+
+
