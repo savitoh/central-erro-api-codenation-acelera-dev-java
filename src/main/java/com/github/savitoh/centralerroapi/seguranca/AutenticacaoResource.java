@@ -3,7 +3,7 @@ package com.github.savitoh.centralerroapi.seguranca;
 import com.github.savitoh.centralerroapi.seguranca.jwt.TokenManager;
 import com.github.savitoh.centralerroapi.seguranca.payload.LoginRequestPayload;
 import com.github.savitoh.centralerroapi.seguranca.payload.TokenResponsePayload;
-import com.github.savitoh.centralerroapi.seguranca.propriedades.TokenType;
+import com.github.savitoh.centralerroapi.seguranca.propriedades.TipoToken;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,7 +38,7 @@ public class AutenticacaoResource {
             Authentication authentication = authManager.authenticate(authenticationToken);
             final String jwt = tokenManager.gerarToken(authentication);
 
-            TokenResponsePayload tokenResponse = new TokenResponsePayload(TokenType.BEARER.getDescricao(), jwt);
+            TokenResponsePayload tokenResponse = new TokenResponsePayload(TipoToken.BEARER.getDescricao(), jwt);
             return ResponseEntity.ok(tokenResponse);
 
         } catch (AuthenticationException e) {

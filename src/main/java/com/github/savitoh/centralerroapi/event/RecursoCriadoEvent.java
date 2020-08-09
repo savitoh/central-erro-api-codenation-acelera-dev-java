@@ -25,17 +25,17 @@ public class RecursoCriadoEvent<T extends Serializable> extends ApplicationEvent
 
     public RecursoCriadoEvent(Object source,
                               HttpServletResponse response,
-                              String pathIdentificadorRecurso,
+                              String nomeIdentificadorRecurso,
                               T identificadorRecurso) {
         this(source, response, identificadorRecurso);
-        this.pathIdentificadorRecurso = URIUtil.criarPathTemplate(pathIdentificadorRecurso);
+        this.pathIdentificadorRecurso = URIUtil.criarPathTemplate(nomeIdentificadorRecurso);
     }
 
     public HttpServletResponse getResponse() {
         return response;
     }
 
-    public Serializable getIdentificadorRecurso() {
+    public T getIdentificadorRecurso() {
         return identificadorRecurso;
     }
 
