@@ -1,12 +1,12 @@
 package com.github.savitoh.centralerroapi.seguranca.propriedades;
 
-public enum TokenType {
+public enum TipoToken {
 
     BEARER("Bearer");
 
     private final String descricao;
 
-    TokenType(String descricao) {
+    TipoToken(String descricao) {
         this.descricao = descricao;
     }
 
