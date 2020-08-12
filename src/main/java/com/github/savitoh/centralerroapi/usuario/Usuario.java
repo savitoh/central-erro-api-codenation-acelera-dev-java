@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 public class Usuario {
@@ -70,45 +71,19 @@ public class Usuario {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((login == null) ? 0 : login.hashCode());
-        result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-        result = prime * result + ((password == null) ? 0 : password.hashCode());
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(id, usuario.id) &&
+                nome.equals(usuario.nome) &&
+                login.equals(usuario.login) &&
+                Objects.equals(createdAt, usuario.createdAt);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Usuario other = (Usuario) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (login == null) {
-            if (other.login != null)
-                return false;
-        } else if (!login.equals(other.login))
-            return false;
-        if (nome == null) {
-            if (other.nome != null)
-                return false;
-        } else if (!nome.equals(other.nome))
-            return false;
-        if (password == null) {
-            if (other.password != null)
-                return false;
-        } else if (!password.equals(other.password))
-            return false;
-        return true;
+    public int hashCode() {
+        return Objects.hash(id, nome, login, createdAt);
     }
+
 }
