@@ -55,7 +55,7 @@ mvn sprinb-boot:run -Dspring.profiles.active=h2
 
 Rode os comandos a seguir na pasta root do projeto: 
 ```
-mvn pagckage  (Cria o artefato .JAR da aplicação.)
+mvn package  (Cria o artefato .JAR da aplicação.)
 ```
 ```
 docker-compose up --build  (Cria a imagem Docker da Aplicação e sobe o container)
