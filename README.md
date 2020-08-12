@@ -50,6 +50,8 @@ mvn sprinb-boot:run -Dspring.profiles.active=h2
 
 #### Requisitos: 
 * Docker e Docker-Compose
+* JDK 11
+* Maven V3.5
 
 Rode os comandos a seguir na pasta root do projeto: 
 ```
