@@ -13,6 +13,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 public class EventoLog {
@@ -43,7 +44,7 @@ public class EventoLog {
     private LocalDateTime dataGeracao;
 
     @NotNull
-    @Column
+    @Column(nullable = false)
     private Integer quantidade;
     
     @Column(columnDefinition = "timestamp")
@@ -82,52 +83,21 @@ public class EventoLog {
         return new EventoLogResponsePayload(this.level, this.descricao, this.log, this.dataGeracao, this.quantidade, usuarioResponsePayload);
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EventoLog eventoLog = (EventoLog) o;
+        return Objects.equals(id, eventoLog.id) &&
+                level == eventoLog.level &&
+                Objects.equals(descricao, eventoLog.descricao) &&
+                dataGeracao.equals(eventoLog.dataGeracao) &&
+                quantidade.equals(eventoLog.quantidade);
+    }
+
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
-        result = prime * result + ((dataGeracao == null) ? 0 : dataGeracao.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((level == null) ? 0 : level.hashCode());
-        result = prime * result + ((quantidade == null) ? 0 : quantidade.hashCode());
-        return result;
+        return Objects.hash(id, level, descricao, dataGeracao, quantidade);
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        EventoLog other = (EventoLog) obj;
-        if (createdAt == null) {
-            if (other.createdAt != null)
-                return false;
-        } else if (!createdAt.equals(other.createdAt))
-            return false;
-        if (dataGeracao == null) {
-            if (other.dataGeracao != null)
-                return false;
-        } else if (!dataGeracao.equals(other.dataGeracao))
-            return false;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (level != other.level)
-            return false;
-        if (quantidade == null) {
-            if (other.quantidade != null)
-                return false;
-        } else if (!quantidade.equals(other.quantidade))
-            return false;
-        return true;
-    }
-
-    
-    
 }
