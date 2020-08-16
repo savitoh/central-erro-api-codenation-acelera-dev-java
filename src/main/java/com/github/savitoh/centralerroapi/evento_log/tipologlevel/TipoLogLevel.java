@@ -9,7 +9,7 @@ public enum TipoLogLevel {
 
     WARNING((short)2, "warning"),
 
-    INFO((short)3, "infor");
+    INFO((short)3, "info");
 
     private final Short id;
 
@@ -24,15 +24,12 @@ public enum TipoLogLevel {
         return id;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
     public static Optional<TipoLogLevel> getById(Short id) {
         return Stream.of(values())
             .filter(tipoLogLevel -> tipoLogLevel.getId().equals(id))
             .findFirst();
     }
-    
+
+
     
 }
