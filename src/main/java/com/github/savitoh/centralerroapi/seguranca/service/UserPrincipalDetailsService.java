@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserPrincipalDetailsService implements UserDetailsService {
@@ -18,12 +19,14 @@ public class UserPrincipalDetailsService implements UserDetailsService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         final Usuario usuario = usuarioRepository.findByLogin(login)
                 .orElseThrow(() -> new UsernameNotFoundException("Não foi possivel encontrar usuário com login: " + login));
         return new UserPrincipal(usuario);
     }
 
+    @Transactional(readOnly = true)
     public UserDetails loadUserById(Integer userId) {
         final Usuario usuario = usuarioRepository.findById(userId)
                 .orElseThrow(() -> new UsernameNotFoundException("Não foi possível encontrar o usuário com id: " + userId));
