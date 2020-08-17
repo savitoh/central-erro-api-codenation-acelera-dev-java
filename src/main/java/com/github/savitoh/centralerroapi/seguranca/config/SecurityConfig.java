@@ -1,6 +1,9 @@
 package com.github.savitoh.centralerroapi.seguranca.config;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.savitoh.centralerroapi.exception.payload.ApiErrorResponsePayload;
+import com.github.savitoh.centralerroapi.seguranca.JwtAuthenticationEntryPoint;
 import com.github.savitoh.centralerroapi.seguranca.filter.FiltroJwtAutenticacao;
 import com.github.savitoh.centralerroapi.seguranca.jwt.TokenManager;
 import com.github.savitoh.centralerroapi.seguranca.service.UserPrincipalDetailsService;
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -63,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(new FiltroJwtAutenticacao(tokenManager, userPrincipalDetailsService),
                         UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling()
-                .authenticationEntryPoint(new JwtAuthenticationEntryPoint());
+                .authenticationEntryPoint(authenticationEntryPoint());
     }
 
     @Override
@@ -77,17 +81,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/configuration/**", "/swagger-resources/**", "/css/**", "/**.ico", "/js/**");
     }
 
-    private static class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
-
-        private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationEntryPoint.class);
-
-        @Override
-        public void commence(HttpServletRequest request, HttpServletResponse response,
-                             AuthenticationException authException) throws IOException, ServletException {
-
-            logger.error("Um acesso não autorizado foi verificado. Mensagem: {}", authException.getMessage());
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Você não está autorizado a acessar esse recurso.");
-        }
+    @Bean
+    public AuthenticationEntryPoint authenticationEntryPoint() {
+        return new JwtAuthenticationEntryPoint();
     }
 
 }

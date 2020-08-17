@@ -15,8 +15,8 @@ class ApiErrorResponsePayloadTest {
 
         Assertions.assertNotNull(apiErrorResponsePayload);
         Assertions.assertEquals(mensagem, apiErrorResponsePayload.getMensagem());
-        Assertions.assertEquals(httpStatus.getReasonPhrase(), apiErrorResponsePayload.getStatus());
-        Assertions.assertEquals(httpStatus.value(), apiErrorResponsePayload.getCode());
+        Assertions.assertEquals(httpStatus.getReasonPhrase(), apiErrorResponsePayload.getStatusHttp());
+        Assertions.assertEquals(httpStatus.value(), apiErrorResponsePayload.getCodigoHttp());
     }
 
     @Test
