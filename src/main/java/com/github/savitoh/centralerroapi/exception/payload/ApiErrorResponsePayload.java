@@ -13,25 +13,25 @@ public class ApiErrorResponsePayload {
 
     private final String mensagem;
 
-    private final int code;
+    private final int codigoHttp;
 
-    private final String status;
+    private final String statusHttp;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private final List<ErrorDetailResponsePayload> errors;
 
     public ApiErrorResponsePayload(String mensagem, HttpStatus httpStatus, @NonNull MethodArgumentNotValidException ex) {
         this.mensagem = mensagem;
-        this.code = httpStatus.value();
-        this.status = httpStatus.getReasonPhrase();
+        this.codigoHttp = httpStatus.value();
+        this.statusHttp = httpStatus.getReasonPhrase();
         this.errors = ErrorDetailResponsePayload.of(ex);
     }
 
     public ApiErrorResponsePayload(String mensagem, @NonNull HttpStatus httpStatus) {
         Assert.notNull(httpStatus, "httpStatus não pode ser nullo");
         this.mensagem = mensagem;
-        this.code = httpStatus.value();
-        this.status = httpStatus.getReasonPhrase();
+        this.codigoHttp = httpStatus.value();
+        this.statusHttp = httpStatus.getReasonPhrase();
         this.errors = Collections.emptyList();
     }
 
@@ -39,12 +39,12 @@ public class ApiErrorResponsePayload {
         return mensagem;
     }
 
-    public int getCode() {
-        return code;
+    public int getCodigoHttp() {
+        return codigoHttp;
     }
 
-    public String getStatus() {
-        return status;
+    public String getStatusHttp() {
+        return statusHttp;
     }
 
     public List<ErrorDetailResponsePayload> getErrors() {
