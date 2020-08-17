@@ -34,17 +34,9 @@ public class AutenticacaoResource {
     public ResponseEntity<TokenResponsePayload> autenticar(@Valid @RequestBody LoginRequestPayload loginRequestPayload) {
 
         UsernamePasswordAuthenticationToken authenticationToken = loginRequestPayload.toUsernamePasswordAuthenticationToken();
-
-        try {
-            Authentication authentication = authManager.authenticate(authenticationToken);
-            final String jwt = tokenManager.gerarToken(authentication);
-
-            TokenResponsePayload tokenResponse = new TokenResponsePayload(TipoToken.BEARER.getDescricao(), jwt);
-            return ResponseEntity.ok(tokenResponse);
-
-        } catch (AuthenticationException e) {
-            return ResponseEntity.badRequest().build();
-        }
-
+        Authentication authentication = authManager.authenticate(authenticationToken);
+        final String jwt = tokenManager.gerarToken(authentication);
+        TokenResponsePayload tokenResponse = new TokenResponsePayload(TipoToken.BEARER.getDescricao(), jwt);
+        return ResponseEntity.ok(tokenResponse);
     }
 }
