@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AutenticacaoResource {
@@ -29,8 +31,7 @@ public class AutenticacaoResource {
     }
 
     @PostMapping
-    public ResponseEntity<TokenResponsePayload> autenticar(
-            @RequestBody LoginRequestPayload loginRequestPayload) {
+    public ResponseEntity<TokenResponsePayload> autenticar(@Valid @RequestBody LoginRequestPayload loginRequestPayload) {
 
         UsernamePasswordAuthenticationToken authenticationToken = loginRequestPayload.toUsernamePasswordAuthenticationToken();
 
