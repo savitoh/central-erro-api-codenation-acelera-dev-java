@@ -6,10 +6,7 @@ import com.github.savitoh.centralerroapi.evento_log.tipologlevel.TipoLogLevel;
 import com.github.savitoh.centralerroapi.usuario.Usuario;
 import com.github.savitoh.centralerroapi.validacao.TipoLogLevelExists;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
 public class NovoEventoLogRequestPayload {
@@ -25,6 +22,7 @@ public class NovoEventoLogRequestPayload {
     @NotEmpty
     private String log;
 
+    @Past
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss", locale = "pt-BR", timezone = "Etc/GMT+3")
     private LocalDateTime dataGeracao;
@@ -40,7 +38,7 @@ public class NovoEventoLogRequestPayload {
     }
 
     public NovoEventoLogRequestPayload(@NotNull Short levelCodigo, @NotEmpty @Max(1000) String descricao,
-                                       @NotEmpty String log, @NotNull LocalDateTime dataGeracao,
+                                       @NotEmpty String log, @Past @NotNull LocalDateTime dataGeracao,
                                        @NotNull Integer quantidade) {
         this.levelCodigo = levelCodigo;
         this.descricao = descricao;

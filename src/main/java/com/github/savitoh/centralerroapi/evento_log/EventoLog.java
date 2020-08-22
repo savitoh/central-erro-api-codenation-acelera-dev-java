@@ -1,6 +1,6 @@
 package com.github.savitoh.centralerroapi.evento_log;
 
-import com.github.savitoh.centralerroapi.evento_log.payload.EventoLogResponsePayload;
+import com.github.savitoh.centralerroapi.evento_log.payload.EventoLogDetalheResponsePayload;
 import com.github.savitoh.centralerroapi.evento_log.tipologlevel.TipoLogLevel;
 import com.github.savitoh.centralerroapi.evento_log.tipologlevel.TipoLogLevelConverter;
 import com.github.savitoh.centralerroapi.usuario.Usuario;
@@ -8,10 +8,7 @@ import com.github.savitoh.centralerroapi.usuario.payload.UsuarioResponsePayload;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -39,6 +36,7 @@ public class EventoLog {
     @Column
     private String log;
 
+    @Past
     @NotNull
     @Column(columnDefinition = "timestamp", nullable = false)
     private LocalDateTime dataGeracao;
@@ -64,7 +62,7 @@ public class EventoLog {
     }
 
     public EventoLog(@NotNull TipoLogLevel level, @NotEmpty @Max(1000) String descricao,
-                     @NotEmpty String log, @NotNull LocalDateTime dataGeracao,
+                     @NotEmpty String log, @Past @NotNull LocalDateTime dataGeracao,
                      @NotNull Integer quantidade, @NotNull Usuario usuario) {
         this.level = level;
         this.descricao = descricao;
@@ -78,9 +76,9 @@ public class EventoLog {
         return id;
     }
 
-    public EventoLogResponsePayload toEventoLogResponsePayload() {
+    public EventoLogDetalheResponsePayload toEventoLogResponsePayload() {
         final UsuarioResponsePayload usuarioResponsePayload = usuario.toDetalheUserResponsePayload();
-        return new EventoLogResponsePayload(this.level, this.descricao, this.log, this.dataGeracao, this.quantidade, usuarioResponsePayload);
+        return new EventoLogDetalheResponsePayload(this.level, this.descricao, this.log, this.dataGeracao, this.quantidade, usuarioResponsePayload);
     }
 
 
