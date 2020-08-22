@@ -6,7 +6,7 @@ import com.github.savitoh.centralerroapi.usuario.payload.UsuarioResponsePayload;
 
 import java.time.LocalDateTime;
 
-public class EventoLogResponsePayload {
+public class EventoLogDetalheResponsePayload {
 
     private final TipoLogLevel level;
 
@@ -21,8 +21,8 @@ public class EventoLogResponsePayload {
 
     private final UsuarioResponsePayload usuarioResponsePayload;
 
-    public EventoLogResponsePayload(TipoLogLevel level, String descricao, String log, LocalDateTime dataGeracao,
-                                    Integer quantidade, UsuarioResponsePayload usuarioResponsePayload) {
+    public EventoLogDetalheResponsePayload(TipoLogLevel level, String descricao, String log, LocalDateTime dataGeracao,
+                                           Integer quantidade, UsuarioResponsePayload usuarioResponsePayload) {
         this.level = level;
         this.descricao = descricao;
         this.log = log;
