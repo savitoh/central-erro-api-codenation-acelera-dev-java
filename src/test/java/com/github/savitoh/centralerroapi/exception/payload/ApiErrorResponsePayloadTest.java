@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 class ApiErrorResponsePayloadTest {
 
     @Test
-    void test_criacao_ApiErrorResponsePayload() {
+    void deve_instanciar_ApiErrorResponsePayload_construtor_mensagem_e_statusHttp() {
         final String mensagem = "erro";
         final HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
 
@@ -20,7 +20,7 @@ class ApiErrorResponsePayloadTest {
     }
 
     @Test
-    void test_criacao_ApiErrorResponsePayload_sobe_exception_quando_status_nullo() {
+    void deve_subir_exception_quando_instanciar_ApiErrorResponsePayload_passando_status_nullo() {
         final String mensagem = "erro";
         final HttpStatus httpStatus = null;
 
