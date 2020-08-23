@@ -16,13 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
+public class AutenticacaoJwtEntryPoint implements AuthenticationEntryPoint {
 
-    private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationEntryPoint.class);
+    private static final Logger logger = LoggerFactory.getLogger(AutenticacaoJwtEntryPoint.class);
 
     private final ObjectMapper objectMapper;
 
-    public JwtAuthenticationEntryPoint() {
+    public AutenticacaoJwtEntryPoint() {
         objectMapper = new ObjectMapper();
         objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
     }
