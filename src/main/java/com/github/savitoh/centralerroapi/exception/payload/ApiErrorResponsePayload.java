@@ -6,8 +6,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ApiErrorResponsePayload {
 
@@ -25,6 +28,19 @@ public class ApiErrorResponsePayload {
         this.codigoHttp = httpStatus.value();
         this.statusHttp = httpStatus.getReasonPhrase();
         this.errors = ErrorDetailResponsePayload.of(ex);
+    }
+
+    public ApiErrorResponsePayload(@NonNull HttpStatus httpStatus,
+                                   @NonNull ConstraintViolationException constraintViolationException) {
+        Assert.notNull(httpStatus, "httpStatus não pode ser nullo");
+        Assert.notNull(constraintViolationException, "constraintViolationException não pode ser nullo");
+        this.mensagem = constraintViolationException.getConstraintViolations()
+                .stream()
+                .map(ConstraintViolation::getMessageTemplate)
+                .collect(Collectors.joining(", "));
+        this.codigoHttp = httpStatus.value();
+        this.statusHttp = httpStatus.getReasonPhrase();
+        this.errors = Collections.emptyList();
     }
 
     public ApiErrorResponsePayload(String mensagem, @NonNull HttpStatus httpStatus) {

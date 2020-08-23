@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.validation.ConstraintViolationException;
+
 @RestControllerAdvice
 public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
@@ -25,9 +27,18 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(RecursoNaoEncontradoException.class)
-    protected ResponseEntity<ApiErrorResponsePayload> handleRecursoNaoEncontrado(RecursoNaoEncontradoException exception) {
-        final var apiErrorRespondePayload = new ApiErrorResponsePayload(exception.getMessage(), HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(apiErrorRespondePayload, HttpStatus.NOT_FOUND);
+    protected ResponseEntity<ApiErrorResponsePayload> handleRecursoNaoEncontrado(
+            RecursoNaoEncontradoException exception) {
+        final var apiErrorResponsePayload = new ApiErrorResponsePayload(exception.getMessage(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(apiErrorResponsePayload, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    protected ResponseEntity<ApiErrorResponsePayload> handlerConstraintViolantionException(
+            ConstraintViolationException constraintViolationException) {
+        final var apiErrorResponsePayload =
+                new ApiErrorResponsePayload(HttpStatus.BAD_REQUEST, constraintViolationException);
+        return new ResponseEntity<>(apiErrorResponsePayload, HttpStatus.BAD_REQUEST);
     }
 
 }
