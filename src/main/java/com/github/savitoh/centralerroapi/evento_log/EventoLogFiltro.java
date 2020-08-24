@@ -1,33 +1,28 @@
-package com.github.savitoh.centralerroapi.evento_log.payload;
+package com.github.savitoh.centralerroapi.evento_log;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.github.savitoh.centralerroapi.evento_log.tipologlevel.TipoLogLevel;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
-public class EventoLogResponsePayload {
-
-    private final Long identificador;
+final class EventoLogFiltro {
 
     private final TipoLogLevel level;
 
     private final String descricao;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss", locale = "pt-BR", timezone = "Etc/GMT+3")
+    private final String log;
+
     private final LocalDateTime dataGeracao;
 
     private final Integer quantidade;
 
-    public EventoLogResponsePayload(Long identificador, TipoLogLevel level, String descricao, LocalDateTime dataGeracao, Integer quantidade) {
-        this.identificador = identificador;
-        this.level = level;
+    public EventoLogFiltro(Short level, String descricao, String log, LocalDateTime dataGeracao, Integer quantidade) {
+        this.level = Objects.nonNull(level) ? TipoLogLevel.getById(level).orElseThrow(IllegalArgumentException::new) : null;
         this.descricao = descricao;
+        this.log = log;
         this.dataGeracao = dataGeracao;
         this.quantidade = quantidade;
-    }
-
-    public Long getIdentificador() {
-        return identificador;
     }
 
     public TipoLogLevel getLevel() {
@@ -44,5 +39,9 @@ public class EventoLogResponsePayload {
 
     public Integer getQuantidade() {
         return quantidade;
+    }
+
+    public String getLog() {
+        return log;
     }
 }

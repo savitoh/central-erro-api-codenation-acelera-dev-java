@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Target({FIELD, CONSTRUCTOR, METHOD})
+@Target({FIELD, CONSTRUCTOR, METHOD, PARAMETER})
 @Retention(RUNTIME)
 @Constraint(validatedBy = TipoLogLevelExistsValidator.class)
 @Documented

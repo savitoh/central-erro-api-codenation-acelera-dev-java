@@ -15,7 +15,7 @@ public enum TipoLogLevel {
 
     private final String descricao;
 
-    private TipoLogLevel(Short id, String descricao) {
+    TipoLogLevel(Short id, String descricao) {
         this.id = id;
         this.descricao = descricao;
     }
