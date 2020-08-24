@@ -1,6 +1,7 @@
 package com.github.savitoh.centralerroapi.evento_log;
 
 import com.github.savitoh.centralerroapi.evento_log.payload.EventoLogDetalheResponsePayload;
+import com.github.savitoh.centralerroapi.evento_log.payload.EventoLogResponsePayload;
 import com.github.savitoh.centralerroapi.evento_log.tipologlevel.TipoLogLevel;
 import com.github.savitoh.centralerroapi.evento_log.tipologlevel.TipoLogLevelConverter;
 import com.github.savitoh.centralerroapi.usuario.Usuario;
@@ -76,9 +77,13 @@ public class EventoLog {
         return id;
     }
 
-    public EventoLogDetalheResponsePayload toEventoLogResponsePayload() {
+    public EventoLogDetalheResponsePayload toEventoLogDetalheResponsePayload() {
         final UsuarioResponsePayload usuarioResponsePayload = usuario.toDetalheUserResponsePayload();
         return new EventoLogDetalheResponsePayload(this.level, this.descricao, this.log, this.dataGeracao, this.quantidade, usuarioResponsePayload);
+    }
+
+    public EventoLogResponsePayload toEventoLogResponsePayload() {
+        return new EventoLogResponsePayload(this.id, this.level, this.descricao, this.dataGeracao, this.quantidade);
     }
 
 
