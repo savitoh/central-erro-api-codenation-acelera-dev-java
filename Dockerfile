@@ -7,5 +7,4 @@ VOLUME /tmp
 
 ADD target/central-erro-api-0.0.1-SNAPSHOT.jar central-erro-api-0.0.1-SNAPSHOT.jar
 
-# Run the jar file
-ENTRYPOINT ["java", "-Dspring.profiles.active=docker", "-jar","central-erro-api-0.0.1-SNAPSHOT.jar"]
+CMD ["sh", "-c", " java ${JAVA_OPTS} -jar central-erro-api-0.0.1-SNAPSHOT.jar"]

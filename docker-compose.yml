@@ -12,6 +12,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/central-erro
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=root
+      - JAVA_OPTS=-Dspring.profiles.active=docker
   postgres-db:
     image: postgres
     ports:
