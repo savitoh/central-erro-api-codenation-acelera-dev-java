@@ -36,3 +36,22 @@ jobs:
         run: mvn -B clean verify -Psonar -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy_heroku:
+    name: Publish - Heroku
+    runs-on: ubuntu-18.04
+    needs: [ test, sonar ]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Login to Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:login
+      - name: Build and push
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:push -a ${{ secrets.HEROKU_APP_NAME }} web --arg JAVA_OPTS=-Dspring.profiles.active=prod
+      - name: Release
+         env:
+           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+         run: heroku container:release -a ${{ secrets.HEROKU_APP_NAME }} web
