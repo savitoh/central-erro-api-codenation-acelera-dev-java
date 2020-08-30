@@ -16,6 +16,12 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<code.coverage.exclusions>
+			**/com.github.savitoh.centralerroapi.CentralErroApiApplication,
+			**/com.github.savitoh.centralerroapi.seguranca.config.PasswordEncoderConfig,
+			**/com.github.savitoh.centralerroapi.seguranca.config.SecurityConfig
+		</code.coverage.exclusions>
 	</properties>
 
 	<dependencies>
@@ -82,4 +88,37 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>sonar</id>
+			<properties>
+				<sonar.sources>.</sonar.sources>
+				<sonar.inclusions>src/main/java/**</sonar.inclusions>
+				<sonar.exclusions>${code.coverage.exclusions}</sonar.exclusions>
+				<sonar.projectKey>savitoh_central-erro-api-codenation-acelera-dev-java</sonar.projectKey>
+				<sonar.organization>savitoh</sonar.organization>
+				<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+			</properties>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.sonarsource.scanner.maven</groupId>
+						<artifactId>sonar-maven-plugin</artifactId>
+						<version>3.7.0.1746</version>
+						<executions>
+							<execution>
+								<phase>verify</phase>
+								<goals>
+									<goal>sonar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
