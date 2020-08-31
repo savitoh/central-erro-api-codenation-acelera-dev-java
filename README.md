@@ -1,4 +1,7 @@
 # Central Erros API
+![Master Branch](https://github.com/savitoh/central-erro-api-codenation-acelera-dev-java/workflows/Master%20Branch/badge.svg)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=savitoh_central-erro-api-codenation-acelera-dev-java&metric=alert_status)](https://sonarcloud.io/dashboard?id=savitoh_central-erro-api-codenation-acelera-dev-java)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=savitoh_central-erro-api-codenation-acelera-dev-java&metric=coverage)](https://sonarcloud.io/dashboard?id=savitoh_central-erro-api-codenation-acelera-dev-java)
 
 Projeto Final da Aceleração Java Online da Codenation.
 
