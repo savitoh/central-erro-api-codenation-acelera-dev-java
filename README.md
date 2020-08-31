@@ -49,14 +49,11 @@ mvn sprinb-boot:run -Dspring.profiles.active=h2
 ### Usando Docker
 
 #### Requisitos: 
-* Docker e Docker-Compose
-* JDK 11
-* Maven V3.5
 
-Rode os comandos a seguir na pasta root do projeto: 
-```
-mvn package  (Cria o artefato .JAR da aplicação.)
-```
+* Docker e Docker-Compose
+
+Rode o comandos abaixo na pasta root do projeto: 
+
 ```
 docker-compose up --build  (Cria a imagem Docker da Aplicação e sobe o container)
 ```
