@@ -5,6 +5,7 @@ import com.github.savitoh.centralerroapi.evento_log.EventoLog;
 import com.github.savitoh.centralerroapi.evento_log.tipologlevel.TipoLogLevel;
 import com.github.savitoh.centralerroapi.usuario.Usuario;
 import com.github.savitoh.centralerroapi.validacao.TipoLogLevelExists;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
@@ -15,11 +16,11 @@ public class NovoEventoLogRequestPayload {
     @TipoLogLevelExists
     private Short levelCodigo;
 
-    @NotEmpty
+    @NotBlank
     @Size(max = 1000)
     private String descricao;
 
-    @NotEmpty
+    @NotBlank
     private String log;
 
     @Past
@@ -47,7 +48,6 @@ public class NovoEventoLogRequestPayload {
         this.quantidade = quantidade;
     }
 
-
     public void setLevelCodigo(Short levelCodigo) {
         this.levelCodigo = levelCodigo;
     }
@@ -66,6 +66,53 @@ public class NovoEventoLogRequestPayload {
 
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
+    }
+
+
+    /**
+     * @deprecated (usado apenas pela  lib  Open API docs)
+     *
+     */
+    @Schema(description = "Código do Tipo Level LOG", type = "integer", allowableValues = {"1", "2", "3"})
+    public Short getLevelCodigo() {
+        return levelCodigo;
+    }
+
+    /**
+     * @deprecated (usado apenas pela  lib  Open API docs)
+     *
+     */
+    @Schema(example = "descricao evento", description = "Descrição do evento LOG")
+    public String getDescricao() {
+        return descricao;
+    }
+
+    /**
+     * @deprecated (usado apenas pela  lib  Open API docs)
+     *
+     */
+    @Schema(description = "stack trace do erro")
+    public String getLog() {
+        return log;
+    }
+
+    /**
+     * @deprecated (usado apenas pela  lib  Open API docs)
+     *
+     */
+    @Schema(example = "04/12/2020 22:10:56", description = "Data que foi gerado o LOG",
+            pattern = "dd/MM/yyyy HH:mm:ss", type = "string")
+    public LocalDateTime getDataGeracao() {
+        return dataGeracao;
+    }
+
+    /**
+     * @deprecated (usado apenas pela  lib  Open API docs)
+     *
+     */
+    @Schema(example = "1", description = "Quantidade de ocorrências do evento")
+    public Integer getQuantidade() {
+        return quantidade;
     }
 
     public EventoLog toEvento(Usuario usuario) {
