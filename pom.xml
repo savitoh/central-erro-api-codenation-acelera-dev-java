@@ -19,8 +19,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<code.coverage.exclusions>
 			**/com.github.savitoh.centralerroapi.CentralErroApiApplication,
-			**/com.github.savitoh.centralerroapi.seguranca.config.PasswordEncoderConfig,
-			**/com.github.savitoh.centralerroapi.seguranca.config.SecurityConfig
+			**/com.github.savitoh.centralerroapi.seguranca.config/**,
+			**/com.github.savitoh.centralerroapi.config/**
 		</code.coverage.exclusions>
 	</properties>
 
@@ -46,11 +46,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -61,6 +61,7 @@
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -77,6 +78,24 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!--Open API-->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.4.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-data-rest</artifactId>
+			<version>1.4.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-security</artifactId>
+			<version>1.4.6</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

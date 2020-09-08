@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.antMatcher("/api/v1/**")
                 .authorizeRequests()
-                .antMatchers("/api/v1/auth/**").permitAll()
+                .antMatchers("/api/v1/auth/**", "/swagger-ui/**", "/api-docs/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .cors().disable()

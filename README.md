@@ -61,4 +61,21 @@ Rode o comandos abaixo na pasta root do projeto:
 docker-compose up --build  (Cria a imagem Docker da Aplicação e sobe o container)
 ```
 
+### Documentação
+
+Após levantar o Serviço, acesse a documentação, baseada na especificação da OpenAPI, no seguinte endereço:
+
+* OpenAPI especificação: 
+
+```
+http://localhost:8080/api-docs 
+```
+
+* Swagger UI:
+
+```
+http://localhost:8080/swagger-ui
+```
+
+
 
