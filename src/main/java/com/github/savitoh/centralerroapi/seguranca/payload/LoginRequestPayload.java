@@ -1,5 +1,6 @@
 package com.github.savitoh.centralerroapi.seguranca.payload;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import javax.validation.constraints.NotEmpty;
@@ -21,4 +22,21 @@ public class LoginRequestPayload {
         return new UsernamePasswordAuthenticationToken(this.login, this.password);
     }
 
+    /**
+     * @deprecated (usado apenas pela  lib  Open API docs)
+     *
+     */
+    @Schema(example = "minha_senha", description = "Senha do usuário")
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @deprecated (usado apenas pela  lib  Open API docs)
+     * @return
+     */
+    @Schema(example = "meu_login", description = "Login do usuário")
+    public String getLogin() {
+        return login;
+    }
 }

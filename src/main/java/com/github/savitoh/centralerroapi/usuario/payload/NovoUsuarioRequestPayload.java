@@ -2,6 +2,7 @@ package com.github.savitoh.centralerroapi.usuario.payload;
 
 import com.github.savitoh.centralerroapi.usuario.Usuario;
 import com.github.savitoh.centralerroapi.validacao.UniqueKey;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.NotBlank;
@@ -34,9 +35,30 @@ public class NovoUsuarioRequestPayload {
         return new Usuario(this.nome, this.login, this.password, passwordEncoder);
     }
 
-    
+    /**
+     * @deprecated (usado apenas pela  lib  Open API docs)
+     *
+     */
+    @Schema(example = "meu_nome", description = "Nome do usuário")
+    public String getNome() {
+        return nome;
+    }
 
+    /**
+     * @deprecated (usado apenas pela  lib  Open API docs)
+     *
+     */
+    @Schema(example = "meu_login", description = "Login do usuário")
+    public String getLogin() {
+        return login;
+    }
 
-    
-    
+    /**
+     * @deprecated (usado apenas pela  lib  Open API docs)
+     *
+     */
+    @Schema(example = "minha_senha", description = "Senha do usuário")
+    public String getPassword() {
+        return password;
+    }
 }
