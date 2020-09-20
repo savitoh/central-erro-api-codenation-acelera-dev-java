@@ -1,4 +1,4 @@
-package com.github.savitoh.centralerroapi.seguranca.propriedades;
+package com.github.savitoh.centralerroapi.seguranca.enums;
 
 public enum TipoToken {
 
