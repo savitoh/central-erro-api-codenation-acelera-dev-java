@@ -16,7 +16,7 @@ public class RecursoCriadoEvent<T extends Serializable> extends ApplicationEvent
 
     private static final String DEFAULT_PATH_IDENTIFICADOR = "/{id}";
 
-    private final HttpServletResponse response;
+    private final transient HttpServletResponse response;
 
     private final T identificadorRecurso;
 

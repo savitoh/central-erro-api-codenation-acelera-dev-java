@@ -73,6 +73,7 @@ public class NovoEventoLogRequestPayload {
      * @deprecated (usado apenas pela  lib  Open API docs)
      *
      */
+    @Deprecated(since = "08/09/2020")
     @Schema(description = "Código do Tipo Level LOG", type = "integer", allowableValues = {"1", "2", "3"})
     public Short getLevelCodigo() {
         return levelCodigo;
@@ -82,6 +83,7 @@ public class NovoEventoLogRequestPayload {
      * @deprecated (usado apenas pela  lib  Open API docs)
      *
      */
+    @Deprecated(since = "08/09/2020")
     @Schema(example = "descricao evento", description = "Descrição do evento LOG")
     public String getDescricao() {
         return descricao;
@@ -91,6 +93,7 @@ public class NovoEventoLogRequestPayload {
      * @deprecated (usado apenas pela  lib  Open API docs)
      *
      */
+    @Deprecated(since = "08/09/2020")
     @Schema(description = "stack trace do erro")
     public String getLog() {
         return log;
@@ -100,6 +103,7 @@ public class NovoEventoLogRequestPayload {
      * @deprecated (usado apenas pela  lib  Open API docs)
      *
      */
+    @Deprecated(since = "08/09/2020")
     @Schema(example = "04/12/2020 22:10:56", description = "Data que foi gerado o LOG",
             pattern = "dd/MM/yyyy HH:mm:ss", type = "string")
     public LocalDateTime getDataGeracao() {
@@ -110,6 +114,7 @@ public class NovoEventoLogRequestPayload {
      * @deprecated (usado apenas pela  lib  Open API docs)
      *
      */
+    @Deprecated(since = "08/09/2020")
     @Schema(example = "1", description = "Quantidade de ocorrências do evento")
     public Integer getQuantidade() {
         return quantidade;

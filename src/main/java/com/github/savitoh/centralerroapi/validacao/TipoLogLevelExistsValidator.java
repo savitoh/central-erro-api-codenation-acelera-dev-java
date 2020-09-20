@@ -11,7 +11,7 @@ public class TipoLogLevelExistsValidator implements ConstraintValidator<TipoLogL
 
     @Override
     public void initialize(TipoLogLevelExists constraintAnnotation) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
