@@ -13,7 +13,6 @@ import com.github.savitoh.centralerroapi.usuario.UsuarioRepository;
 import com.github.savitoh.centralerroapi.validacao.TipoLogLevelExists;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -88,16 +87,15 @@ public class EventoLogResource {
             @ApiResponse(responseCode = "401", description = "Não foi possivél autenticar a requisição.",
                     content = @Content(schema = @Schema(implementation = ApiErrorResponsePayload.class))),
     })
-    @Parameters({
-            @Parameter(name = "page", description = "número da página",
-                    in = ParameterIn.QUERY, schema = @Schema(type = "integer", defaultValue = "0")),
-            @Parameter(name = "size", description = "tamanho da página",
-                    in = ParameterIn.QUERY, schema = @Schema(type = "integer", defaultValue = "10")),
-            @Parameter(name = "sort", description = "coluna a ser ordenada",
-                    in = ParameterIn.QUERY, schema = @Schema(type = "string", defaultValue = "")),
-            @Parameter(name = "direction", description = "direção a ser ordenada",
-                    in = ParameterIn.QUERY, schema = @Schema(type = "string", defaultValue = "ASC", allowableValues = {"ASC", "DESC"}))
-    })
+
+    @Parameter(name = "page", description = "número da página",
+            in = ParameterIn.QUERY, schema = @Schema(type = "integer", defaultValue = "0"))
+    @Parameter(name = "size", description = "tamanho da página",
+            in = ParameterIn.QUERY, schema = @Schema(type = "integer", defaultValue = "10"))
+    @Parameter(name = "sort", description = "coluna a ser ordenada",
+            in = ParameterIn.QUERY, schema = @Schema(type = "string", defaultValue = ""))
+    @Parameter(name = "direction", description = "direção a ser ordenada",
+            in = ParameterIn.QUERY, schema = @Schema(type = "string", defaultValue = "ASC", allowableValues = {"ASC", "DESC"}))
     public Page<EventoLogResponsePayload> recuperarPorFiltro(
             @Parameter(description="Código do Tipo Log Level", in=ParameterIn.QUERY, schema=@Schema(type="integer", allowableValues = {"1", "2", "3"}))
             @TipoLogLevelExists @RequestParam(required = false)

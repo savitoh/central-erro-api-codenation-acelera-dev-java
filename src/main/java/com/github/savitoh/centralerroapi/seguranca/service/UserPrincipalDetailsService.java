@@ -20,7 +20,7 @@ public class UserPrincipalDetailsService implements UserDetailsService {
 
     @Override
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String login) {
         final Usuario usuario = usuarioRepository.findByLogin(login)
                 .orElseThrow(() -> new UsernameNotFoundException("Não foi possivel encontrar usuário com login: " + login));
         return new UserPrincipal(usuario);

@@ -23,18 +23,20 @@ public class LoginRequestPayload {
     }
 
     /**
-     * @deprecated (usado apenas pela  lib  Open API docs)
+     * @deprecated (usado apenas pela  lib Open API docs)
      *
      */
+    @Deprecated(since = "08/09/2020")
     @Schema(example = "minha_senha", description = "Senha do usuário")
     public String getPassword() {
         return password;
     }
 
     /**
-     * @deprecated (usado apenas pela  lib  Open API docs)
+     * @deprecated (usado apenas pela  lib Open API docs)
      * @return
      */
+    @Deprecated(since = "08/09/2020")
     @Schema(example = "meu_login", description = "Login do usuário")
     public String getLogin() {
         return login;
