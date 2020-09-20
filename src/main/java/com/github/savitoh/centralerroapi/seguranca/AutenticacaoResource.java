@@ -4,7 +4,7 @@ import com.github.savitoh.centralerroapi.exception.payload.ApiErrorResponsePaylo
 import com.github.savitoh.centralerroapi.seguranca.jwt.TokenManager;
 import com.github.savitoh.centralerroapi.seguranca.payload.LoginRequestPayload;
 import com.github.savitoh.centralerroapi.seguranca.payload.TokenResponsePayload;
-import com.github.savitoh.centralerroapi.seguranca.propriedades.TipoToken;
+import com.github.savitoh.centralerroapi.seguranca.enums.TipoToken;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

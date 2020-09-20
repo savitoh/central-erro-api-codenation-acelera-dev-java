@@ -20,7 +20,8 @@
 		<code.coverage.exclusions>
 			**/com.github.savitoh.centralerroapi.CentralErroApiApplication,
 			**/com.github.savitoh.centralerroapi.seguranca.config/**,
-			**/com.github.savitoh.centralerroapi.config/**
+			**/com.github.savitoh.centralerroapi.config/**,
+			**/com.github.savitoh.centralerroapi.seguranca.enums/**
 		</code.coverage.exclusions>
 	</properties>
 
@@ -139,7 +140,7 @@
 				<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 			</properties>
 			<activation>
-				<activeByDefault>false</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 			</activation>
 			<build>
 				<plugins>
