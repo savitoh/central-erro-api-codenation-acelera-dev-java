@@ -14,7 +14,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=root
       - JAVA_OPTS=-Dspring.profiles.active=docker -XX:+UseContainerSupport
   postgres-db:
-    image: postgres
+    image: 'postgres:11-alpine'
     ports:
       - "5432:5432"
     environment:
