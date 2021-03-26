@@ -78,7 +78,7 @@ public class EventoLog {
     }
 
     public EventoLogDetalheResponsePayload toEventoLogDetalheResponsePayload() {
-        final UsuarioResponsePayload usuarioResponsePayload = usuario.toDetalheUserResponsePayload();
+        final UsuarioResponsePayload usuarioResponsePayload = this.usuario.toDetalheUserResponsePayload();
         return new EventoLogDetalheResponsePayload(this.level, this.descricao, this.log, this.dataGeracao, this.quantidade, usuarioResponsePayload);
     }
 
