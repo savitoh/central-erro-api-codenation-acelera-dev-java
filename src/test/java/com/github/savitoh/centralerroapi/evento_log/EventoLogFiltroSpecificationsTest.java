@@ -17,8 +17,4 @@ class EventoLogFiltroSpecificationsTest {
                 "[Assertion failed] - this argument is required; it must not be null"
         );
     }
-
-    public void should_return_specification_when_input_notnull() {
-
-    }
 }
