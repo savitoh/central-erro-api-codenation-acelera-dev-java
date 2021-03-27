@@ -2,11 +2,14 @@ package com.github.savitoh.centralerroapi.validacao;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
 
+import javax.validation.Payload;
+import java.lang.annotation.Annotation;
 import java.util.stream.Stream;
 
 class TipoLogLevelExistsValidatorTest {
@@ -22,6 +25,13 @@ class TipoLogLevelExistsValidatorTest {
     @MethodSource("proverValoresExistentesTipoLogLevel")
     void retorna_true_quando_validar_codigos_tipologlevel_existentes(Short codigoTipoLogLevel, boolean resultadoEsperado) {
         Assertions.assertEquals(resultadoEsperado, tipoLogLevelExistsValidator.isValid(codigoTipoLogLevel, null));
+    }
+
+    @Test
+    void retorna_true_quando_codigo_nullo_for_permitido() {
+        this.tipoLogLevelExistsValidator.initialize(new TipoLogLevelExistisFaker());
+
+        Assertions.assertTrue(tipoLogLevelExistsValidator.isValid(null, null));
     }
 
     @ParameterizedTest
@@ -65,6 +75,34 @@ class TipoLogLevelExistsValidatorTest {
                 Arguments.of(0L, false),
                 Arguments.of(new Object(), false)
         );
+    }
+
+    private static class TipoLogLevelExistisFaker implements TipoLogLevelExists {
+
+        @Override
+        public String message() {
+            return "";
+        }
+
+        @Override
+        public boolean permitNull() {
+            return true;
+        }
+
+        @Override
+        public Class<?>[] groups() {
+            return new Class[0];
+        }
+
+        @Override
+        public Class<? extends Payload>[] payload() {
+            return new Class[0];
+        }
+
+        @Override
+        public Class<? extends Annotation> annotationType() {
+            return null;
+        }
     }
 
 }
