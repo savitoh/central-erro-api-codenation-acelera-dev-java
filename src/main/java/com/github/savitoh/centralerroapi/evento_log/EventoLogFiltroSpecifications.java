@@ -1,46 +1,38 @@
 package com.github.savitoh.centralerroapi.evento_log;
 
+import com.github.savitoh.centralerroapi.common.BaseSpecification;
 import com.github.savitoh.centralerroapi.evento_log.tipologlevel.TipoLogLevel;
-import io.jsonwebtoken.lang.Assert;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
-final class EventoLogFiltroSpecifications {
+@Component
+public class EventoLogFiltroSpecifications extends BaseSpecification<EventoLog, EventoLogFiltro> {
 
-    private EventoLogFiltroSpecifications() {
-
+    private Specification<EventoLog> filtrarLogLevel(final TipoLogLevel tipoLogLevel) {
+        return conjuctionPredicateIfNull(tipoLogLevel)
+                .orElse((root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(EventoLog_.LEVEL), tipoLogLevel));
     }
 
-    private static Specification<EventoLog> filtrarLogLevel(@NonNull TipoLogLevel tipoLogLevel) {
-        return (root, query, builder) -> builder.equal(root.get("level"), tipoLogLevel);
+    private Specification<EventoLog> filtrarLog(final String log) {
+        return conjuctionPredicateIfNull(log)
+                .orElse((root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(EventoLog_.LOG), log));
     }
 
-    private static Specification<EventoLog> filtrarDescricao(@NonNull String descricao) {
-        return (root, query, builder) -> builder.like(root.get("descricao"), descricao);
+    private Specification<EventoLog> filtroDataGeracao(final LocalDateTime dataGeracao) {
+        return conjuctionPredicateIfNull(dataGeracao)
+                .orElse((root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(EventoLog_.DATA_GERACAO), dataGeracao));
     }
 
-    private static Specification<EventoLog> filtrarLog(@NonNull String log) {
-        return (root, query, builder) -> builder.like(root.get("log"), log);
+    public Specification<EventoLog> of(@NonNull final EventoLogFiltro filter) {
+        Assert.notNull(filter, "[Assertion failed] - this argument is required; it must not be null");
+        final Specification<EventoLog> specification = filtrarLogLevel(filter.getLevel());
+        specification.and(filtrarLog(filter.getLog()));
+        specification.and(filtroDataGeracao(filter.getDataGeracao()));
+        return specification;
     }
 
-    private static Specification<EventoLog> filtroQuantidade(@NonNull Integer quantidade) {
-        return (root, query, builder) -> builder.equal(root.get("quantidade"), quantidade);
-    }
-
-    private static Specification<EventoLog> filtroDataGeracao(@NonNull LocalDateTime dataGeracao) {
-        return (root, query, builder) -> builder.equal(root.get("dataGeracao"), dataGeracao);
-    }
-
-    public static Specification<EventoLog> of(@NonNull EventoLogFiltro filtro) {
-        Assert.notNull(filtro);
-        return Specification
-                .where(Objects.isNull(filtro.getLevel()) ? null : filtrarLogLevel(filtro.getLevel()))
-                .and(Objects.isNull(filtro.getDataGeracao()) ? null : filtroDataGeracao(filtro.getDataGeracao()))
-                .and(Objects.isNull(filtro.getQuantidade()) ? null : filtroQuantidade(filtro.getQuantidade()))
-                .and(Objects.isNull(filtro.getDescricao()) ? null : filtrarDescricao(filtro.getDescricao()))
-                .and(Objects.isNull(filtro.getLog()) ? null : filtrarLog(filtro.getLog()));
-    }
 }
