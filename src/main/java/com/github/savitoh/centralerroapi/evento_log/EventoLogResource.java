@@ -1,5 +1,6 @@
 package com.github.savitoh.centralerroapi.evento_log;
 
+import com.github.savitoh.centralerroapi.common.BaseSpecification;
 import com.github.savitoh.centralerroapi.event.RecursoCriadoEvent;
 import com.github.savitoh.centralerroapi.evento_log.payload.EventoLogDetalheResponsePayload;
 import com.github.savitoh.centralerroapi.evento_log.payload.EventoLogResponsePayload;
@@ -52,12 +53,16 @@ public class EventoLogResource {
 
     private final ApplicationEventPublisher publisher;
 
+    private final BaseSpecification<EventoLog, EventoLogFiltro> eventoLogFiltroSpecifications;
+
     public EventoLogResource(EventoLogRepository eventoLogRepository,
                              UsuarioRepository usuarioRepository,
-                             ApplicationEventPublisher publisher) {
+                             ApplicationEventPublisher publisher,
+                             EventoLogFiltroSpecifications eventoLogFiltroSpecifications) {
         this.eventoLogRepository = eventoLogRepository;
         this.usuarioRepository = usuarioRepository;
         this.publisher = publisher;
+        this.eventoLogFiltroSpecifications = eventoLogFiltroSpecifications;
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -115,7 +120,7 @@ public class EventoLogResource {
             @Parameter(hidden = true) @PageableDefault Pageable pageable) {
 
         EventoLogFiltro eventoLogFiltro = new EventoLogFiltro(level, log, descricao, dataGeracao, quantidade);
-        Specification<EventoLog> specifications = EventoLogFiltroSpecifications.of(eventoLogFiltro);
+        Specification<EventoLog> specifications = eventoLogFiltroSpecifications.of(eventoLogFiltro);
 
         return eventoLogRepository.findAll(specifications, pageable).map(EventoLog::toEventoLogResponsePayload);
     }
