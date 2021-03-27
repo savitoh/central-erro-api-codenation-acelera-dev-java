@@ -103,7 +103,7 @@ public class EventoLogResource {
             in = ParameterIn.QUERY, schema = @Schema(type = "string", defaultValue = "ASC", allowableValues = {"ASC", "DESC"}))
     public Page<EventoLogResponsePayload> recuperarPorFiltro(
             @Parameter(description="Código do Tipo Log Level", in=ParameterIn.QUERY, schema=@Schema(type="integer", allowableValues = {"1", "2", "3"}))
-            @TipoLogLevelExists @RequestParam(required = false)
+            @TipoLogLevelExists(permitNull = true) @RequestParam(required = false)
                     Short level,
             @Parameter(description="Param Descricao", in=ParameterIn.QUERY, schema=@Schema(type="string"))
             @RequestParam(required = false)

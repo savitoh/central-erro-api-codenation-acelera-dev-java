@@ -18,6 +18,8 @@ public @interface TipoLogLevelExists {
 
     String message() default "Não existe LogLevel com este codigo.";
 
+    boolean permitNull() default false;
+
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
