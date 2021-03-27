@@ -18,10 +18,10 @@
 		<java.version>11</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<code.coverage.exclusions>
-			**/com.github.savitoh.centralerroapi.CentralErroApiApplication,
-			**/com.github.savitoh.centralerroapi.seguranca.config/**,
-			**/com.github.savitoh.centralerroapi.config/**,
-			**/com.github.savitoh.centralerroapi.seguranca.enums/**
+			src/main/java/com.github.savitoh.centralerroapi.CentralErroApiApplication,
+			src/main/java/com.github.savitoh.centralerroapi.seguranca.config/**,
+			src/main/java/com.github.savitoh.centralerroapi.config/**,
+			src/main/java/com.github.savitoh.centralerroapi.seguranca.enums/**
 		</code.coverage.exclusions>
 	</properties>
 
@@ -164,7 +164,7 @@
 				<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 			</properties>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<build>
 				<plugins>
