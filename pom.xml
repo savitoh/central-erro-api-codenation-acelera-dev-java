@@ -18,10 +18,10 @@
 		<java.version>11</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<code.coverage.exclusions>
-			src/main/java/com.github.savitoh.centralerroapi.CentralErroApiApplication,
-			src/main/java/com.github.savitoh.centralerroapi.seguranca.config/**,
-			src/main/java/com.github.savitoh.centralerroapi.config/**,
-			src/main/java/com.github.savitoh.centralerroapi.seguranca.enums/**
+			**/com.github.savitoh.centralerroapi.seguranca.config/**,
+			**/com.github.savitoh.centralerroapi.config/**,
+			**/com.github.savitoh.centralerroapi.seguranca.enums/**
+			**/com.github.savitoh.centralerroapi.CentralErroApiApplication,
 		</code.coverage.exclusions>
 	</properties>
 
@@ -157,7 +157,7 @@
 			<id>sonar</id>
 			<properties>
 				<sonar.sources>.</sonar.sources>
-				<sonar.inclusions>src/main/java/**</sonar.inclusions>
+				<sonar.inclusions>src/main/java/**,src/main/resources/**</sonar.inclusions>
 				<sonar.exclusions>${code.coverage.exclusions}</sonar.exclusions>
 				<sonar.projectKey>savitoh_central-erro-api-codenation-acelera-dev-java</sonar.projectKey>
 				<sonar.organization>savitoh</sonar.organization>
