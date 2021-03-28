@@ -1,7 +1,7 @@
 package com.github.savitoh.centralerroapi.usuario.payload;
 
 import com.github.savitoh.centralerroapi.usuario.Usuario;
-import com.github.savitoh.centralerroapi.validacao.UniqueKey;
+import com.github.savitoh.centralerroapi.common.validation.UniqueKey;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

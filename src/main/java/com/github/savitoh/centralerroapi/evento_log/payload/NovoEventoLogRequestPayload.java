@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.github.savitoh.centralerroapi.evento_log.EventoLog;
 import com.github.savitoh.centralerroapi.evento_log.tipologlevel.TipoLogLevel;
 import com.github.savitoh.centralerroapi.usuario.Usuario;
-import com.github.savitoh.centralerroapi.validacao.TipoLogLevelExists;
+import com.github.savitoh.centralerroapi.common.validation.TipoLogLevelExists;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.constraints.*;
