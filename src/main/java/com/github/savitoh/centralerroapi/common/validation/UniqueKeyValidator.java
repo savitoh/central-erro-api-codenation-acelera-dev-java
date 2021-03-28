@@ -1,4 +1,4 @@
-package com.github.savitoh.centralerroapi.validacao;
+package com.github.savitoh.centralerroapi.common.validation;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

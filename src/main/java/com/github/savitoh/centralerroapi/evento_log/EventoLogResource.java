@@ -11,7 +11,7 @@ import com.github.savitoh.centralerroapi.exception.payload.ApiErrorResponsePaylo
 import com.github.savitoh.centralerroapi.seguranca.UserPrincipal;
 import com.github.savitoh.centralerroapi.usuario.Usuario;
 import com.github.savitoh.centralerroapi.usuario.UsuarioRepository;
-import com.github.savitoh.centralerroapi.validacao.TipoLogLevelExists;
+import com.github.savitoh.centralerroapi.common.validation.TipoLogLevelExists;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;

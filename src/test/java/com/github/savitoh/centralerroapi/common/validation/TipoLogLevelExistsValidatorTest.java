@@ -1,4 +1,4 @@
-package com.github.savitoh.centralerroapi.validacao;
+package com.github.savitoh.centralerroapi.common.validation;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
