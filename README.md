@@ -38,11 +38,23 @@ Abaixo estão os requisitos desta API, o time terá total liberdade para tomar a
 
 A aplicação pode ser iniciada de diversas formas, abaixo exploraremos todas elas. 
 
+### Importando em IDE
+
+#### Requisitos:
+* JDK 11
+* Maven V3.2
+* VScode, Eclipse, Netbeans, IntelliJ IDEA, escolha uma versão com suporte as tecnoligias acima.
+
+Para importar corretamente o projeto deve ser gerado o JPA Criteria Metamodel, para tal rode o comando a seguir na pasta root do projeto:
+```
+mvn clean generate-sources
+```
+
 ### Usando Banco em Memória (H2)
 
 #### Requisitos: 
 * JDK 11
-* Maven V3.5
+* Maven V3.2
 
 Rode o comando a seguir na pasta root do projeto: 
 ```
