@@ -18,10 +18,10 @@
 		<java.version>11</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<code.coverage.exclusions>
-			**/com.github.savitoh.centralerroapi.seguranca.config/**,
-			**/com.github.savitoh.centralerroapi.config/**,
-			**/com.github.savitoh.centralerroapi.seguranca.enums/**
-			**/com.github.savitoh.centralerroapi.CentralErroApiApplication,
+			**/com/github/savitoh/centralerroapi/seguranca.config/**,
+			**/com/github/savitoh/centralerroapi/config/**,
+			**/com/github/savitoh/centralerroapi/seguranca/enums/**,
+			**/com/github/savitoh/centralerroapi/CentralErroApiApplication
 		</code.coverage.exclusions>
 	</properties>
 
